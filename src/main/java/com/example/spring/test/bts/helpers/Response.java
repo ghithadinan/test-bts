@@ -80,7 +80,7 @@ public class Response {
         return new ResponseEntity<>(baseResponseMap("Not found"), HttpStatus.NOT_FOUND);
     }
 
-    public static ResponseEntity<Object> forbiden() {
+    public static ResponseEntity<Object> forbidden() {
         return new ResponseEntity<>(baseResponseMap("Forbidden"), HttpStatus.FORBIDDEN);
     }
 }

@@ -31,7 +31,7 @@ public class AuthService {
                 return Response.success(jwtService.generateToken(data.get().getUsername()));
             }
         }
-        return Response.forbiden();
+        return Response.forbidden();
     }
 
     public ResponseEntity<Object> register(User req) {
