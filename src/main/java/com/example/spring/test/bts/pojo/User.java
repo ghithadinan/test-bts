@@ -1,5 +1,6 @@
 package com.example.spring.test.bts.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,6 +25,7 @@ public class User {
     @NotEmpty(message = "Username required")
     private String username;
 
+    @JsonIgnore
     @Column(name = "password")
     @NotEmpty(message = "Password required")
     private String password;

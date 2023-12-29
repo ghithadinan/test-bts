@@ -40,7 +40,6 @@ public class AuthService {
         user.setPassword(encoder.encode(req.getPassword()));
         user.setEmail(req.getEmail());
         repo.save(user);
-        user.setPassword(null);
         return Response.created(user);
     }
 }
