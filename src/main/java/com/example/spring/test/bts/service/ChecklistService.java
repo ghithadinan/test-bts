@@ -42,7 +42,7 @@ public class ChecklistService {
         ChecklistItem checklistItem = new ChecklistItem();
         checklistItem.setChecklistId(id);
         checklistItem.setItemName(req.getItemName());
-        return Response.success(repoItem.save(checklistItem));
+        return Response.created(repoItem.save(checklistItem));
     }
 
     public ResponseEntity<Object> getItem(String id, String itemId) {
@@ -53,10 +53,9 @@ public class ChecklistService {
     public ResponseEntity<Object> updateStatus(String id, String itemId) {
         Optional<ChecklistItem> checklistItem = repoItem.findByChecklistIdAndId(id, itemId);
         if (checklistItem.isPresent()) {
-            boolean status = !checklistItem.get().getIsChecked();
-            checklistItem.get().setIsChecked(status);
+            checklistItem.get().setIsChecked(!checklistItem.get().getIsChecked());
             repoItem.save(checklistItem.get());
-            return Response.success();
+            return Response.success(checklistItem.get());
         }
         return Response.notFound();
     }
