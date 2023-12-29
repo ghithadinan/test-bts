@@ -52,10 +52,12 @@ public class ChecklistService {
 
     public ResponseEntity<Object> updateStatus(String id, String itemId) {
         Optional<ChecklistItem> checklistItem = repoItem.findByChecklistIdAndId(id, itemId);
-        Boolean status = true;
-        if(checklistItem.isPresent()) {
-
+        if (checklistItem.isPresent()) {
+            boolean status = !checklistItem.get().getIsChecked();
+            checklistItem.get().setIsChecked(status);
+            repoItem.save(checklistItem.get());
+            return Response.success();
         }
-        return Response.success();
+        return Response.notFound();
     }
 }
