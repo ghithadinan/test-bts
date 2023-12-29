@@ -47,7 +47,17 @@ public class ChecklistContoller {
     }
 
     @PutMapping("{id}/item/{itemId}")
-    public ResponseEntity<Object> updateStatus(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
+    public ResponseEntity<Object> updateItemStatus(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
         return service.updateStatus(id, itemId);
+    }
+
+    @DeleteMapping("{id}/item/{itemId}")
+    public ResponseEntity<Object> deleteItem(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
+        return service.deleteItem(id, itemId);
+    }
+
+    @PutMapping("{id}/item/rename/{itemId}")
+    public ResponseEntity<Object> updateItemName(@PathVariable("id") String id, @PathVariable("itemId") String itemId, @RequestBody String itemName) {
+        return service.updateItemName(id, itemId, itemName);
     }
 }

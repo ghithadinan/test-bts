@@ -59,4 +59,23 @@ public class ChecklistService {
         }
         return Response.notFound();
     }
+
+    public ResponseEntity<Object> deleteItem(String id, String itemId) {
+        Optional<ChecklistItem> checklistItem = repoItem.findByChecklistIdAndId(id, itemId);
+        if (checklistItem.isPresent()) {
+            repoItem.delete(checklistItem.get());
+            return Response.success();
+        }
+        return Response.notFound();
+    }
+
+    public ResponseEntity<Object> updateItemName(String id, String itemId, String itemName) {
+        Optional<ChecklistItem> checklistItem = repoItem.findByChecklistIdAndId(id, itemId);
+        if (checklistItem.isPresent()) {
+            checklistItem.get().setItemName(itemName);
+            repoItem.save(checklistItem.get());
+            return Response.success(checklistItem.get());
+        }
+        return Response.notFound();
+    }
 }
