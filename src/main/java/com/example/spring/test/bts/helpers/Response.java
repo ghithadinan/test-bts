@@ -9,6 +9,19 @@ import java.util.Map;
 
 public class Response {
 
+    public static ResponseModel baseResponse(String message, Object data) {
+        ResponseModel res = new ResponseModel();
+        res.setMesage(message);
+        res.setData(data);
+        return res;
+    }
+
+    public static ResponseModel baseResponse(String message) {
+        ResponseModel res = new ResponseModel();
+        res.setMesage(message);
+        return res;
+    }
+
     public static Map<String, Object> baseResponseMap(String message, Object data) {
         Map<String, Object> result = new HashMap<>();
         result.put("message", message);
@@ -23,64 +36,68 @@ public class Response {
         return result;
     }
 
-    public static ResponseEntity<Object> success() {
+    public static ResponseEntity<ResponseModel> success() {
         ResponseModel res = new ResponseModel();
         res.setMesage("Success");
         return ResponseEntity.ok().body(res);
     }
 
-    public static ResponseEntity<Object> success(Object data) {
+    public static ResponseEntity<ResponseModel> success(Object data) {
         ResponseModel res = new ResponseModel();
         res.setMesage("Success");
         res.setData(data);
         return ResponseEntity.ok().body(res);
     }
 
-    public static ResponseEntity<Object> created(Object data) {
-        return new ResponseEntity<>(baseResponseMap("Created", data), HttpStatus.CREATED);
+    public static ResponseEntity<ResponseModel> created(Object data) {
+        return new ResponseEntity<>(baseResponse("Created", data), HttpStatus.CREATED);
     }
 
-    public static ResponseEntity<Object> unprocessableEnity(String message) {
+    public static ResponseEntity<ResponseModel> unprocessableEnity(String message) {
         ResponseModel res = new ResponseModel();
         res.setMesage(message);
         return ResponseEntity.unprocessableEntity().body(res);
     }
 
-    public static ResponseEntity<Object> badRequest() {
+    public static ResponseEntity<ResponseModel> badRequest() {
         ResponseModel res = new ResponseModel();
         res.setMesage("Bad Request");
         return ResponseEntity.badRequest().body(res);
     }
 
-    public static ResponseEntity<Object> badRequest(Object data) {
+    public static ResponseEntity<ResponseModel> badRequest(Object data) {
         ResponseModel res = new ResponseModel();
         res.setMesage("Bad Request");
         res.setData(data);
         return ResponseEntity.badRequest().body(res);
     }
 
-    public static ResponseEntity<Object> badRequest(String message) {
+    public static ResponseEntity<Object> badRequestObject(Object data) {
+        return ResponseEntity.badRequest().body(baseResponseMap("Bad Request", data));
+    }
+
+    public static ResponseEntity<ResponseModel> badRequest(String message) {
         ResponseModel res = new ResponseModel();
         res.setMesage(message);
         return ResponseEntity.badRequest().body(res);
     }
 
-    public static ResponseEntity<Object> badRequest(String message, Object data) {
+    public static ResponseEntity<ResponseModel> badRequest(String message, Object data) {
         ResponseModel res = new ResponseModel();
         res.setMesage(message);
         res.setData(data);
         return ResponseEntity.badRequest().body(res);
     }
 
-    public static ResponseEntity<Object> notFound(String message) {
-        return new ResponseEntity<>(baseResponseMap(message), HttpStatus.NOT_FOUND);
+    public static ResponseEntity<ResponseModel> notFound(String message) {
+        return new ResponseEntity<>(baseResponse(message), HttpStatus.NOT_FOUND);
     }
 
-    public static ResponseEntity<Object> notFound() {
-        return new ResponseEntity<>(baseResponseMap("Not found"), HttpStatus.NOT_FOUND);
+    public static ResponseEntity<ResponseModel> notFound() {
+        return new ResponseEntity<>(baseResponse("Not found"), HttpStatus.NOT_FOUND);
     }
 
-    public static ResponseEntity<Object> forbidden() {
-        return new ResponseEntity<>(baseResponseMap("Forbidden"), HttpStatus.FORBIDDEN);
+    public static ResponseEntity<ResponseModel> forbidden() {
+        return new ResponseEntity<>(baseResponse("Forbidden"), HttpStatus.FORBIDDEN);
     }
 }

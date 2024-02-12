@@ -1,5 +1,6 @@
 package com.example.spring.test.bts.controller;
 
+import com.example.spring.test.bts.model.ResponseModel;
 import com.example.spring.test.bts.pojo.Checklist;
 import com.example.spring.test.bts.pojo.ChecklistItem;
 import com.example.spring.test.bts.service.ChecklistService;
@@ -17,47 +18,47 @@ public class ChecklistContoller {
     ChecklistService service;
 
     @GetMapping
-    public ResponseEntity<Object> all() {
+    public ResponseEntity<ResponseModel> all() {
         return service.all();
     }
 
     @PostMapping
-    public ResponseEntity<Object> post(@Valid @RequestBody Checklist req) {
+    public ResponseEntity<ResponseModel> post(@Valid @RequestBody Checklist req) {
         return service.create(req);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+    public ResponseEntity<ResponseModel> delete(@PathVariable("id") String id) {
         return service.delete(id);
     }
 
     @GetMapping("{id}/item")
-    public ResponseEntity<Object> itemsById(@PathVariable("id") String id) {
+    public ResponseEntity<ResponseModel> itemsById(@PathVariable("id") String id) {
         return service.itemsById(id);
     }
 
     @PostMapping("{id}/item")
-    public ResponseEntity<Object> itemsCreate(@PathVariable("id") String id, @Valid @RequestBody ChecklistItem req) {
+    public ResponseEntity<ResponseModel> itemsCreate(@PathVariable("id") String id, @Valid @RequestBody ChecklistItem req) {
         return service.itemsCreate(id, req);
     }
 
     @PostMapping("{id}/item/{itemId}")
-    public ResponseEntity<Object> getItem(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
+    public ResponseEntity<ResponseModel> getItem(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
         return service.getItem(id, itemId);
     }
 
     @PutMapping("{id}/item/{itemId}")
-    public ResponseEntity<Object> updateItemStatus(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
+    public ResponseEntity<ResponseModel> updateItemStatus(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
         return service.updateStatus(id, itemId);
     }
 
     @DeleteMapping("{id}/item/{itemId}")
-    public ResponseEntity<Object> deleteItem(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
+    public ResponseEntity<ResponseModel> deleteItem(@PathVariable("id") String id, @PathVariable("itemId") String itemId) {
         return service.deleteItem(id, itemId);
     }
 
     @PutMapping("{id}/item/rename/{itemId}")
-    public ResponseEntity<Object> updateItemName(@PathVariable("id") String id, @PathVariable("itemId") String itemId, @RequestBody String itemName) {
+    public ResponseEntity<ResponseModel> updateItemName(@PathVariable("id") String id, @PathVariable("itemId") String itemId, @RequestBody String itemName) {
         return service.updateItemName(id, itemId, itemName);
     }
 }

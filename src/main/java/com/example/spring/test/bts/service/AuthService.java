@@ -3,6 +3,7 @@ package com.example.spring.test.bts.service;
 import com.example.spring.test.bts.config.JwtService;
 import com.example.spring.test.bts.helpers.Response;
 import com.example.spring.test.bts.model.LoginRequestModel;
+import com.example.spring.test.bts.model.ResponseModel;
 import com.example.spring.test.bts.pojo.User;
 import com.example.spring.test.bts.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class AuthService {
     @Autowired
     PasswordEncoder encoder;
 
-    public ResponseEntity<Object> login(LoginRequestModel req) {
+    public ResponseEntity<ResponseModel> login(LoginRequestModel req) {
         Optional<User> data = repo.findByUsername(req.getUsername());
         if (data.isPresent()) {
             if (encoder.matches(req.getPassword(), data.get().getPassword())) {
@@ -34,7 +35,7 @@ public class AuthService {
         return Response.forbidden();
     }
 
-    public ResponseEntity<Object> register(User req) {
+    public ResponseEntity<ResponseModel> register(User req) {
         User user = new User();
         user.setUsername(req.getUsername());
         user.setPassword(encoder.encode(req.getPassword()));

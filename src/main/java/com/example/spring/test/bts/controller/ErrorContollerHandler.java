@@ -63,9 +63,8 @@ public class ErrorContollerHandler extends ResponseEntityExceptionHandler {
                 FieldError fieldError = (FieldError) obje;
                 listErr.add(new ResponseErrorModel(fieldError.getField(), obje.getDefaultMessage()));
             }
-            return Response.badRequest(listErr);
-
+            return Response.badRequestObject(listErr);
         }
-        return Response.badRequest(ex.getMessage());
+        return Response.badRequestObject(ex.getMessage());
     }
 }
