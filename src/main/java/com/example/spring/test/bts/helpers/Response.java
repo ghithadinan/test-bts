@@ -83,9 +83,7 @@ public class Response {
     }
 
     public static ResponseEntity<ResponseModel> badRequest(String message, Object data) {
-        ResponseModel res = new ResponseModel();
-        res.setMesage(message);
-        res.setData(data);
+        ResponseModel res = baseResponse(message, data);
         return ResponseEntity.badRequest().body(res);
     }
 
